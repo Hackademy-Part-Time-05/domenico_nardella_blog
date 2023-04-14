@@ -7,13 +7,9 @@ use App\Models\Article;
 
 class ArticleController extends Controller
 {
-    public function store()
+    public function store(Request $request)
     {
-        Article::create([
-            'title' => 'Il mio secondo articolo',
-            'author' => 'Giuseppe',
-            'body' => '...'
-        ]);
+       Article::create($request->all());
     }
 
     public function index()
@@ -21,5 +17,10 @@ class ArticleController extends Controller
         $articles = Article::all();
 
         return view('articles.index', ['articles' => $articles]);
+    }
+
+    public function create()
+    {
+        return view('articles.create');
     }
 }

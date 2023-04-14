@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('welcome');});
 
-Route::get('articles/store', [App\Http\Controllers\ArticleController::class, 'store']);
-Route::get('articles', [App\Http\Controllers\ArticleController::class, 'index']);
+// Route::get('articles/store', [ArticleController::class, 'store'])->name('articles.store');
+Route::get('articles', [ArticleController::class, 'index']);
+
+Route::get('articles/create', [ArticleController::class, 'create'])->name('articles.create');
+
+Route::post('articles/store', [ArticleController::class, 'store'])->name('articles.store');
 
 
