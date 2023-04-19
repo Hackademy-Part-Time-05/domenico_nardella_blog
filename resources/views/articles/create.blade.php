@@ -6,17 +6,20 @@
                     @csrf
                     <div class="col-12">
                         <label for="title">Titolo</label>
-                        <input type="text" name="title" id="title" class="form-control @error('title') is-invalid @enderror">
+                        <input type="text" name="title" id="title" value="{{old('title')}}" maxlength="150"
+                                class="form-control @error('title') is-invalid @enderror">
                         @error('title') <span class="small text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="col-12">
                         <label for="category">Categoria</label>
-                        <input type="text" name="category" id="category" class="form-control @error('category') is-invalid @enderror">
+                        <input type="text" name="category" id="category" value="{{old('category')}}"
+                                class="form-control @error('category') is-invalid @enderror">
                         @error('category') <span class="small text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="col-12">
                         <label for="body">Corpo</label>
-                        <textarea name="body" id="body" class="form-control @error('body') is-invalid @enderror" rows="10"></textarea>
+                        <textarea name="body" id="body" 
+                                class="form-control @error('body') is-invalid @enderror" rows="10">{{old('body')}}</textarea>
                         @error('body') <span class="small text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="col-12">

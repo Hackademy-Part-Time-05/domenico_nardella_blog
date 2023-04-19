@@ -9,6 +9,11 @@
             </div>
         </div>
        
+        @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success')}}
+        </div>
+        @endif
 
         <table class="table table-bordered mt-5">
             <thead>

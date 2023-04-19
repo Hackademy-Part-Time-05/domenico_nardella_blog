@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Article;
 use \Illuminate\Support\Facades\Validator;
+use \App\Http\Requests\StoreArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -21,20 +22,11 @@ class ArticleController extends Controller
         return view('articles.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreArticleRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'category' => 'required',
-            'body' => 'required',
-        ]);
-
-        if($validator->fails()) {
-
-            return redirect()->back()->withErrors($validator);
-        }
-
        Article::create($request->all());
+
+       return redirect()->route('articles.index')->with(['success' => 'Articolo creato correttamente']);
     }
 
     public function show(Article $article)
