@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-6 mx-auto">
-                <form action="{{route('articles.store')}}" method="POST">
+                <form action="{{route('articles.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="col-12">
                         <label for="title">Titolo</label>
@@ -21,6 +21,10 @@
                         <textarea name="body" id="body" 
                                 class="form-control @error('body') is-invalid @enderror" rows="10">{{old('body')}}</textarea>
                         @error('body') <span class="small text-danger">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="col-12">
+                        <label for="image">Immaggine</label>
+                        <input type="file" name="image" id="image" class="form-control">
                     </div>
                     <div class="col-12">
                         <button class="btn btn-primary" type="submit">Salva</button>
