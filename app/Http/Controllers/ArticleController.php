@@ -25,6 +25,15 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+        $article = new Article();
+
+        $article->title = $request->title;
+        $article->category = $request->category;
+        $article->body = $request->body;
+
+        $article->save();
+
+
         if($request->hasFile('image') && $request->file('image')->isValid()) {
 
             $fileName = $request->file('image')->getClientOriginalName();
@@ -33,14 +42,14 @@ class ArticleController extends Controller
 
             $seoFriendlyFileName = Str::slug($request->title) . '.' . $request->file('image')->extension();
 
-            $request->file('image')->storeAs('public/images', $seoFriendlyFileName);
+           $imagePath = $request->file('image')->storeAs('public/images/' . $article->id, $seoFriendlyFileName);
 
+           $article->image = $imagePath;
+
+           $article->save();
         } 
         
-
-       Article::create($request->all());
-
-    //    return redirect()->route('articles.index')->with(['success' => 'Articolo creato correttamente']);
+       return redirect()->route('articles.index')->with(['success' => 'Articolo creato correttamente']);
     }
 
     public function show(Article $article)
