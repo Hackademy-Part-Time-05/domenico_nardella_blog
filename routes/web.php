@@ -26,4 +26,6 @@ Route::post('account/articles/store', [ArticleController::class, 'store'])->name
 
 Route::get('account/articles/{article}/show', [ArticleController::class, 'show'])->name('articles.show');
 
+Route::resource('categories', \App\Http\Controllers\CategoryController::class);
+
 
