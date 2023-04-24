@@ -13,12 +13,15 @@ use App\Http\Controllers\ArticleController;
 |
 */
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Route::get('articles/store', [ArticleController::class, 'store'])->name('articles.store');
-Route::get('account/articles', [ArticleController::class, 'index'])->name('articles.index');
+Route::get('account', [ArticleController::class, 'index'])->name('account')->middleware('auth');
 
-Route::get('account/articles/create', [ArticleController::class, 'create'])->name('articles.create');
+Route::get('account/articles', [ArticleController::class, 'index'])->name('articles.index')->middleware('auth');
+
+Route::get('account/articles/create', [ArticleController::class, 'create'])->name('articles.create')->middleware('auth');
 Route::post('account/articles/store', [ArticleController::class, 'store'])->name('articles.store');
 
 Route::get('account/articles/{article}/show', [ArticleController::class, 'show'])->name('articles.show');
