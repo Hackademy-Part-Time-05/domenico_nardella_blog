@@ -12,7 +12,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::paginate(3);   //orderBy('id')->get(); se voglio in modo crescente e togliere ctegories link in index per funzionare
+
+        return view('categories.index', compact('categories'));
     }
 
     /**
@@ -20,7 +22,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
     /**
@@ -28,7 +30,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Category::create($request->all());
     }
 
     /**
@@ -44,7 +46,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -52,7 +54,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->fill($request->all())->save();
+
+        return redirect()->back()->with(['success' => 'Categoria modificata correttamente']);
     }
 
     /**
@@ -60,6 +64,9 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->back()->with(['success' => 'Categoria eliminata correttamente']);
     }
 }
+
