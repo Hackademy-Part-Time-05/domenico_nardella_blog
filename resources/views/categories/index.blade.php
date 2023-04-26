@@ -35,7 +35,7 @@
                         <form action="{{ route('categories.destroy', $category) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger ms-2">candella</button>
+                            <button type="submit" class="btn btn-sm btn-danger ms-2">cancella</button>
                         </form>
                     </td>
                 </tr>

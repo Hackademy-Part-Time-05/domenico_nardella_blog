@@ -2,8 +2,9 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-6 mx-auto">
-                <form action="{{route('articles.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="col-12">
                         <label for="title">Titolo</label>
                         <input type="text" name="title" id="title" value="{{ old('title', $article->title) }}" maxlength="150"
@@ -14,10 +15,15 @@
                         <label for="category_id">Categoria</label>
                         <select name="category_id" id="category_id" class="form-control">
                             @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option 
+                                value="{{ $category->id }}"
+                                @if($category->id === $article->category_id)
+                                selected
+                                @endif
+                            >{{ $category->name }}</option>
                             @endforeach
                         </select>
-
+                    
                         {{-- <input type="text" name="category" id="category" value="{{old('category')}}"
                                 class="form-control @error('category') is-invalid @enderror">
                         @error('category') <span class="small text-danger">{{ $message }}</span>@enderror --}}

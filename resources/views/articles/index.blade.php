@@ -5,7 +5,7 @@
                 <h1>I miei articoli</h1>
             </div>
             <div class="col 6 text-end">
-                <a href="{{route('articles.create')}}"class="btn btn-primary">Crea Articolo</a>
+                <a href="{{ route('articles.create') }}"class="btn btn-primary">Crea Articolo</a>
             </div>
         </div>
        

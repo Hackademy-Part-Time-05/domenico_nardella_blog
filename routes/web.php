@@ -26,6 +26,10 @@ Route::post('account/articles/store', [ArticleController::class, 'store'])->name
 
 Route::get('account/articles/{article}/show', [ArticleController::class, 'show'])->name('articles.show');
 
+Route::get('account/articles/{article}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
+
+Route::put('account/articles/{article}/update', [ArticleController::class, 'update'])->name('articles.update');
+
 Route::resource('categories', \App\Http\Controllers\CategoryController::class);
 
 

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-6 mx-auto">
                 <h1 class="mb-3">Crea una nuova categoria</h1>
-                
+               
                 <form action="{{ route('categories.store') }}" method="POST">
                     @csrf
                     <div class="row g-3">

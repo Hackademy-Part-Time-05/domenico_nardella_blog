@@ -60,7 +60,7 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         if($article->user_id !== auth()->user()->id) {
-            abort(403);
+            // abort(403);
         }
 
         $categories = Category::all();
