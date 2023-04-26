@@ -6,7 +6,7 @@
                     @csrf
                     <div class="col-12">
                         <label for="title">Titolo</label>
-                        <input type="text" name="title" id="title" value="{{old('title')}}" maxlength="150"
+                        <input type="text" name="title" id="title" value="{{ old('title', $article->title) }}" maxlength="150"
                                 class="form-control @error('title') is-invalid @enderror">
                         @error('title') <span class="small text-danger">{{ $message }}</span>@enderror
                     </div>
@@ -25,7 +25,9 @@
                     <div class="col-12">
                         <label for="body">Corpo</label>
                         <textarea name="body" id="body" 
-                                class="form-control @error('body') is-invalid @enderror" rows="10">{{old('body')}}</textarea>
+                                class="form-control @error('body') is-invalid @enderror" 
+                                rows="10"
+                                >{{old('body', $article->body)}}</textarea>
                         @error('body') <span class="small text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="col-12">

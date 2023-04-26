@@ -7,20 +7,24 @@ use App\Models\Article;
 use \Illuminate\Support\Facades\Validator;
 use \App\Http\Requests\StoreArticleRequest;
 use \Illuminate\Support\Str;
+use App\Models\Category;
 
 class ArticleController extends Controller
 {
    
     public function index()
     {
-        $articles = Article::all();
+        // $articles = Article::where('user_id', auth()->user()->id)->get();  1° metodo (sotto c'è il 2°metodo)
+        $articles = auth()->user()->articles;
 
         return view('articles.index', ['articles' => $articles]);
     }
 
     public function create()
     {
-        return view('articles.create');
+        $categories = Category::all();
+
+        return view('articles.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -28,7 +32,8 @@ class ArticleController extends Controller
         $article = new Article();
 
         $article->title = $request->title;
-        $article->category = $request->category;
+        $article->user_id = auth()->user()->id;
+        $article->category_id = $request->category_id;
         $article->body = $request->body;
 
         $article->save();
@@ -50,6 +55,17 @@ class ArticleController extends Controller
         } 
         
        return redirect()->route('articles.index')->with(['success' => 'Articolo creato correttamente']);
+    }
+
+    public function edit(Article $article)
+    {
+        if($article->user_id !== auth()->user()->id) {
+            abort(403);
+        }
+
+        $categories = Category::all();
+
+        return view('articles.edit', compact('article', 'categories'));
     }
 
     public function show(Article $article)

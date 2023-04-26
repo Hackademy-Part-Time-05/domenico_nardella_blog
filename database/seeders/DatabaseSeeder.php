@@ -18,5 +18,25 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        $this->categories();
+        $this->users();
     }
+
+    private function categories() {
+        \App\Models\Category::create(['name' => 'Esteri']);
+        \App\Models\Category::create(['name' => 'Politica']);
+        \App\Models\Category::create(['name' => 'Economia']);
+        \App\Models\Category::create(['name' => 'Sport']);
+    }
+
+    private function users() {
+
+        \App\Models\User::create([
+            'name' => 'Giuseppe',
+            'email' => 'giuseppe@example.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('28488567'),
+        ]);
+    }
+
 }

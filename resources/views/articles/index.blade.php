@@ -20,6 +20,7 @@
                 <tr>
                     <th>Titolo</th>
                     <th>Categoria</th>
+                    <th>Utente</th>
                     <th></th>
                 </tr>
             </thead>
@@ -27,9 +28,10 @@
                 @foreach ($articles as $article)
                 <tr>
                     <td>{{ $article->title }}</td>
-                    <td>{{ $article->category }}</td>
+                    <td>{{ $article->category->name }}</td>
+                    <td>{{ $article->user->name }} {{ $article->user->email }}</td>
                     <td class="text-end">
-                        <a href="{{route('articles.show', $article)}}">visualizza</a>
+                        <a href="{{ route('articles.edit', $article) }}">modifica</a>
                     </td>
                 </tr>
                 @endforeach

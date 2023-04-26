@@ -1,6 +1,6 @@
 <x-main>
     <div class="container mt-5">
-        <span class="text-info fw-bold">{{ $article->category }}</span>
+        <span class="text-info fw-bold">{{ $article->category->name }}</span>
         <h1>{{ $article->title }}</h1>
 
         <div class="mt-5">
