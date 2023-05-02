@@ -33,3 +33,15 @@ Route::put('account/articles/{article}/update', [ArticleController::class, 'upda
 Route::resource('categories', \App\Http\Controllers\CategoryController::class);
 
 
+
+// Route::middleware('auth')->prefix('account')->group(function() {
+
+//     Route::resources([
+//         'articles' => \App\Http\Controllers\ArticleController::class,
+//         'categories' => \App\Http\Controllers\CategoryController::class
+//     ]);
+    
+
+// });
+
+

@@ -2,27 +2,30 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-6 mx-auto">
-                <form action="" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('articles.update', $article) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="col-12">
                         <label for="title">Titolo</label>
                         <input type="text" name="title" id="title" value="{{ old('title', $article->title) }}" maxlength="150"
                                 class="form-control @error('title') is-invalid @enderror">
-                        @error('title') <span class="small text-danger">{{ $message }}</span>@enderror
+                        {{-- @error('title') <span class="small text-danger">{{ $message }}</span>@enderror --}}
                     </div>
                     <div class="col-12">
-                        <label for="category_id">Categoria</label>
-                        <select name="category_id" id="category_id" class="form-control">
+                        <label for="category">Categoria</label>
                             @foreach ($categories as $category)
-                            <option 
-                                value="{{ $category->id }}"
-                                @if($category->id === $article->category_id)
-                                selected
-                                @endif
-                            >{{ $category->name }}</option>
+                            <div class="form-check">
+                                <input class="form-check-input" 
+                                    name="categories[]" 
+                                    type="checkbox" 
+                                    value=" {{ $category->id }}"
+                                    @checked($article->categories->contains($category->id))
+                                    >
+                                <label class="form-check-label" for="flexCheckDefault">
+                                 {{ $category->name}}
+                                </label>
+                              </div> 
                             @endforeach
-                        </select>
                     
                         {{-- <input type="text" name="category" id="category" value="{{old('category')}}"
                                 class="form-control @error('category') is-invalid @enderror">

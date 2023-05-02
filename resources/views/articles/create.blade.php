@@ -11,13 +11,17 @@
                         @error('title') <span class="small text-danger">{{ $message }}</span>@enderror
                     </div>
                     <div class="col-12">
-                        <label for="category_id">Categoria</label>
-                        <select name="category_id" id="category_id" class="form-control">
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                            @endforeach
-                        </select>
+                        <label for="category">Categoria</label>
 
+                            @foreach ($categories as $category)
+                            <div class="form-check">
+                                <input class="form-check-input" name="categories[]" type="checkbox" value="{{ $category->id }}">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                 {{ $category->name}}
+                                </label>
+                              </div> 
+                            @endforeach
+                        
                         {{-- <input type="text" name="category" id="category" value="{{old('category')}}"
                                 class="form-control @error('category') is-invalid @enderror">
                         @error('category') <span class="small text-danger">{{ $message }}</span>@enderror --}}

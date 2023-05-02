@@ -26,8 +26,8 @@ class DatabaseSeeder extends Seeder
     private function categories() {
         \App\Models\Category::create(['name' => 'Esteri']);
         \App\Models\Category::create(['name' => 'Politica']);
-        \App\Models\Category::create(['name' => 'Economia']);
         \App\Models\Category::create(['name' => 'Sport']);
+        \App\Models\Category::create(['name' => 'Economia']);
     }
 
     private function users() {

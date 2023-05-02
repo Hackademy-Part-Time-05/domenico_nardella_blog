@@ -28,7 +28,13 @@
                 @foreach ($articles as $article)
                 <tr>
                     <td>{{ $article->title }}</td>
-                    <td>{{ $article->category->name }}</td>
+                    <td>
+                        <ul>
+                        @foreach ($article->categories as $category)
+                            <li>{{ $category->name }}</li>
+                        @endforeach
+                        </ul>
+                    </td>
                     <td>{{ $article->user->name }} {{ $article->user->email }}</td>
                     <td class="text-end">
                         <a href="{{ route('articles.edit', $article) }}">modifica</a>

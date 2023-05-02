@@ -29,14 +29,18 @@ class ArticleController extends Controller
 
     public function store(Request $request)
     {
+
+
         $article = new Article();
 
         $article->title = $request->title;
         $article->user_id = auth()->user()->id;
-        $article->category_id = $request->category_id;
+        // $article->category_id = $request->category_id;
         $article->body = $request->body;
 
         $article->save();
+
+        $article->categories()->attach($request->categories);
 
 
         if($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -60,12 +64,18 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         if($article->user_id !== auth()->user()->id) {
-            // abort(403);
+            abort(403);
         }
 
         $categories = Category::all();
 
         return view('articles.edit', compact('article', 'categories'));
+    }
+    public function update(Request $request, Article $article) 
+    {
+        $article->fill($request->all())->save();
+        
+        $article->categories->attach($request->categories);
     }
 
     public function show(Article $article)
