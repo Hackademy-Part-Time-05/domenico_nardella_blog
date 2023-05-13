@@ -24,7 +24,12 @@ class ArticleController extends Controller
     {
         $categories = Category::all();
 
-        return view('articles.create', compact('categories'));
+        $action = route('article.store');
+        $method = 'POST';
+
+        $article = new Article();
+
+        return view('articles.form', compact('categories', 'action', 'method', 'article'));
     }
 
     public function store(Request $request)
@@ -71,11 +76,17 @@ class ArticleController extends Controller
 
         return view('articles.edit', compact('article', 'categories'));
     }
+
     public function update(Request $request, Article $article) 
     {
         $article->fill($request->all())->save();
         
-        $article->categories->attach($request->categories);
+        $article->categories()->detach();
+        // $article->categories()->detach(1); stacca una sola categoria
+        // $article->categories()->detach([1, 2]); stacca piu categorie a scelta
+        $article->categories()->attach($request->categories);
+
+        return redirect()->back()->with(['success', 'Articolo modificato con successo.']);
     }
 
     public function show(Article $article)
